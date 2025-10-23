@@ -29,6 +29,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Checkout shared Gemini scripts
+        uses: actions/checkout@v4
+        with:
+          repository: Sunwood-ai-labsII/gemini-actions-lab
+          path: gemini-actions-lab-shared
+          fetch-depth: 1
+
       - name: Collect PR context
         id: context
         env:
@@ -102,7 +109,7 @@ jobs:
           PROMPT_OUTPUT_PATH: 'prompt.txt'
         run: |
           set -euo pipefail
-          python3 .github/scripts/build_reviewer_prompt.py
+          python3 gemini-actions-lab-shared/.github/scripts/build_reviewer_prompt.py
           {
             echo 'prompt<<EOF'
             cat prompt.txt
